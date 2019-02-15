@@ -1,85 +1,130 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>The 2019 Brian Challenge</title>
-    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <meta property="og:title" content="The Brian Challenge">
-    <meta property="og:site_name" content="The Brian Challenge">
-    <meta property="og:url" content="http://brianchallenge.work">
-    <meta property="og:description" content="Competitors face off to see who can retain their punctuality in this full intensity, work commitment sport.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="http://brianchallenge.work/img/opengraph.png">
-    <style type="text/css">
-        body {
-            font-family: 'Gloria Hallelujah', cursive;
-            padding: 2% 10% 0 10%;
-        }
-
-        h1, h3 {
-            text-align: center;
-        }
-
-        .text-red {
-            color: red;
-        }
-
-        table {
-            padding: 20px;
-            border: 3px solid black;
-            border-radius: 50px;
-            width: 50%;
-            margin: 0 auto;
-            margin-top: 50px;            
-        }
-    </style>
+  <title>The 2019 Brian Challenge</title>
+  <meta property="og:title" content="The Brian Challenge">
+  <meta property="og:site_name" content="The Brian Challenge">
+  <meta property="og:url" content="http://brianchallenge.work">
+  <meta property="og:description" content="Competitors face off to see who can retain their punctuality in this full intensity, work commitment sport.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="http://brianchallenge.work/img/opengraph.png">
+  <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+  <style type="text/css">
+  body {
+    font-family: 'Gloria Hallelujah', cursive;
+  }
+  .rules {
+    font-size: 1.2em;
+  }
+</style>
 </head>
-<body>
-    <h1>The <span class="text-red">Brian</span> Challenge</h1>
+<body class="m-4">
+  <div class="row mb-4">
+    <div class="col-md-12 text-center">
+      <h1>The <span class="text-danger">Brian</span> Challenge</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">Rules</h3>
+          <ul class="rules">
+            <li>Last person to arrive after 9am gets <span class="text-danger"><strong>1</strong> point</span></li>
+            <li>If you are the only person after 9am, you get <span class="text-danger"><strong>1</strong> point</span></li>
+            <li>Points reset every week</li>
+            <li>Person who loses has to treat other competitors to a customized Starbucks beverage at the end of the week</li>
+            <li>Loser has to keep a shameful card on their desk admitting to their incompetence.</li>
+            <li>Excuses must be approved by <span class="text-danger">Brian</span>.</li>
+            <li><span class="text-danger">Brian</span> can change any and all rules of the game at any time without notice (and retroactively).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title mb-4">Scores</h3>
+          <table id="scoreArea" class="table table-sm mb-4">
+            <tr>
+              <td>Date</td>
+              <td>Vika</td>
+              <td>Nafeu</td>
+              <td>Johnny</td>
+            </tr>
+          </table>
+          <h4 class="mb-2">Totals:</h4>
+          <p id="current-week" class="text-muted"></p>
+          <div id="totalsArea" class="text-center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    
+    $(document).ready(function(){
+      // Dom Selectors
+      var scoreArea = $('#scoreArea');
+      var totalsArea = $('#totalsArea');
+      var currentWeek = $('#current-week');
 
-    <h2>RULES</h2>
-    <ul>
-        <li>Last person to arrive after 9am gets <strong>1</strong> point</li>
-        <li>If you are the only person after 9am, you get <strong>1</strong> point</li>
-        <li>Points reset every week</li>
-        <li>Person who loses has to treat other competitors to a customized Starbucks beverage at the end of the week</li>
-        <li>Loser has to keep a shameful card on their desk admitting to their incompetence.</li>
-        <li>Excuses must be approved by <span class="text-red">Brian</span>.</li>
-        <li><span class="text-red">Brian</span> can change any and all rules of the game at any time without notice (and retroactively).</li>
-    </ul>
+      // State Data
+      var appData = {
+        scores: [
+          {
+            date: "February 19th",
+            vika: 0,
+            nafeu: 0,
+            johnny: 0
+          },
+          {
+            date: "February 20th",
+            vika: 0,
+            nafeu: 0,
+            johnny: 0
+          },
+          {
+            date: "February 21st",
+            vika: 0,
+            nafeu: 0,
+            johnny: 0
+          },
+          {
+            date: "February 22nd",
+            vika: 0,
+            nafeu: 0,
+            johnny: 0
+          },
+        ],
+        totals: {
+          vika: 0,
+          nafeu: 0,
+          johnny: 0
+        },
+        currentWeek: ""
+      }
 
-    <table>
-      <tr>
-        <th></th>
-        <th colspan="3">Competitors</th>
-      </tr>
-      <tr>
-        <td>Date</td>
-        <td>Vika</td>
-        <td>Johnny</td>
-        <td>Nafeu</td>
-      </tr>
-      <tr>
-        <td>February 15th (Warmup)</td>
-        <td>1</td>
-        <td>0</td>
-        <td>0</td>
-      </tr>
-      <tr>
-        <td>February 19th</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-      </tr>
-      <tr>
-        <td>February 20th</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-      </tr>
-    </table>
+      // Dom Modifications
+      appData.scores.forEach(function(data){
+        scoreArea.append("<tr><td>" + data.date + "</td><td>" + data.vika + "</td><td>" + data.nafeu + "</td><td>" + data.johnny + "</td></tr>");
+        appData.totals.vika += data.vika;
+        appData.totals.nafeu += data.nafeu;
+        appData.totals.johnny += data.johnny;
+      });
+      totalsArea.append("<p class='mb-1 text-bold'>Vika: " + appData.totals.vika + "</p>");
+      totalsArea.append("<p class='mb-1 text-bold'>Nafeu: " + appData.totals.nafeu + "</p>");
+      totalsArea.append("<p class='mb-1 text-bold'>Johnny: " + appData.totals.johnny + "</p>");
+      currentWeek.text('Week of February 20th')
+    });
+
+  </script>
 </body>
 </html>
