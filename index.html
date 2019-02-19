@@ -28,6 +28,9 @@
   .rules {
     font-size: 1.2em;
   }
+  i {
+    font-size: 1.5em;
+  }
 </style>
 </head>
 <body class="m-4">
@@ -57,76 +60,58 @@
       <div class="card mb-4">
         <div class="card-body">
           <h3 class="card-title mb-4">Scores</h3>
-          <table id="scoreArea" class="table table-sm mb-4">
-            <tr>
+          <table id="score-area" class="table table-sm mb-4">
+            <tr id="score-headers">
               <td>Date</td>
-              <td>Vika</td>
-              <td>Nafeu</td>
-              <td>Johnny</td>
             </tr>
           </table>
-          <h4 class="mb-2">Totals:</h4>
-          <p id="current-week" class="text-muted"></p>
-          <div id="totalsArea" class="text-center"></div>
         </div>
       </div>
     </div>
   </div>
   <script type="text/javascript">
+
+    // State Data
+    var appData = {
+      competitors: [
+        "Nafeu", "Vika", "Johnny", "Jaspreet"
+      ],
+      results: [
+        {
+          date: "February 19th",
+          scores: [0, 0, 0, 0]
+        },
+        {
+          date: "February 20th",
+          scores: [null, null, null, null]
+        },
+        {
+          date: "February 21st",
+          scores: [null, null, null, null]
+        },
+        {
+          date: "February 22nd",
+          scores: [null, null, null, null]
+        },
+      ],
+      totals: [0, 0, 0, 0]
+    }
     
     $(document).ready(function(){
-      // Dom Selectors
-      var scoreArea = $('#scoreArea');
-      var totalsArea = $('#totalsArea');
-      var currentWeek = $('#current-week');
-
-      // State Data
-      var appData = {
-        scores: [
-          {
-            date: "February 19th",
-            vika: 0,
-            nafeu: 0,
-            johnny: 0
-          },
-          {
-            date: "February 20th",
-            vika: null,
-            nafeu: null,
-            johnny: null
-          },
-          {
-            date: "February 21st",
-            vika: null,
-            nafeu: null,
-            johnny: null
-          },
-          {
-            date: "February 22nd",
-            vika: null,
-            nafeu: null,
-            johnny: null
-          },
-        ],
-        totals: {
-          vika: 0,
-          nafeu: 0,
-          johnny: 0
-        },
-        currentWeek: ""
-      }
-
-      // Dom Modifications
-      appData.scores.forEach(function(data){
-        scoreArea.append("<tr><td>" + data.date + "</td><td>" + getScoreIcon(data.vika) + "</td><td>" + getScoreIcon(data.nafeu) + "</td><td>" + getScoreIcon(data.johnny) + "</td></tr>");
-        appData.totals.vika += data.vika;
-        appData.totals.nafeu += data.nafeu;
-        appData.totals.johnny += data.johnny;
+      appData.competitors.forEach(function(competitor){
+        $("#score-headers").append($("<td>").text(competitor));
       });
-      totalsArea.append("<p class='mb-1 text-bold'>Vika: " + appData.totals.vika + "</p>");
-      totalsArea.append("<p class='mb-1 text-bold'>Nafeu: " + appData.totals.nafeu + "</p>");
-      totalsArea.append("<p class='mb-1 text-bold'>Johnny: " + appData.totals.johnny + "</p>");
-      currentWeek.text('Week of February 20th')
+
+      appData.results.forEach(function(result){
+        $("#score-area").append(
+          $("<tr/>")
+            .append($("<td/>").text(result.date))
+            .append($("<td/>").html(getScoreIcon(result.scores[0])))
+            .append($("<td/>").html(getScoreIcon(result.scores[1])))
+            .append($("<td/>").html(getScoreIcon(result.scores[2])))
+            .append($("<td/>").html(getScoreIcon(result.scores[3])))
+        )
+      });
     });
 
     function getScoreIcon(score) {
