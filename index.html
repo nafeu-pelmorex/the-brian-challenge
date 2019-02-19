@@ -14,6 +14,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
@@ -87,21 +88,21 @@
           },
           {
             date: "February 20th",
-            vika: 0,
-            nafeu: 0,
-            johnny: 0
+            vika: null,
+            nafeu: null,
+            johnny: null
           },
           {
             date: "February 21st",
-            vika: 0,
-            nafeu: 0,
-            johnny: 0
+            vika: null,
+            nafeu: null,
+            johnny: null
           },
           {
             date: "February 22nd",
-            vika: 0,
-            nafeu: 0,
-            johnny: 0
+            vika: null,
+            nafeu: null,
+            johnny: null
           },
         ],
         totals: {
@@ -114,7 +115,7 @@
 
       // Dom Modifications
       appData.scores.forEach(function(data){
-        scoreArea.append("<tr><td>" + data.date + "</td><td>" + data.vika + "</td><td>" + data.nafeu + "</td><td>" + data.johnny + "</td></tr>");
+        scoreArea.append("<tr><td>" + data.date + "</td><td>" + getScoreIcon(data.vika) + "</td><td>" + getScoreIcon(data.nafeu) + "</td><td>" + getScoreIcon(data.johnny) + "</td></tr>");
         appData.totals.vika += data.vika;
         appData.totals.nafeu += data.nafeu;
         appData.totals.johnny += data.johnny;
@@ -124,6 +125,17 @@
       totalsArea.append("<p class='mb-1 text-bold'>Johnny: " + appData.totals.johnny + "</p>");
       currentWeek.text('Week of February 20th')
     });
+
+    function getScoreIcon(score) {
+      if (score !== null) {
+        if (score == 0) {
+          return '<i class="fas fa-check"></i>';
+        }
+        return '<i class="fas fa-times"></i>';
+      } else {
+        return '<i class="far fa-square"></i>';
+      }
+    }
 
   </script>
 </body>
