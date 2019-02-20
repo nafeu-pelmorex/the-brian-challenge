@@ -31,6 +31,10 @@
   i {
     font-size: 1.5em;
   }
+  .total-score {
+    font-size: 1.6em;
+    font-weight: bold;
+  }
 </style>
 </head>
 <body class="m-4">
@@ -83,7 +87,7 @@
         },
         {
           date: "February 20th",
-          scores: [null, null, null, null]
+          scores: [0, 0, 1, 0]
         },
         {
           date: "February 21st",
@@ -111,7 +115,21 @@
             .append($("<td/>").html(getScoreIcon(result.scores[2])))
             .append($("<td/>").html(getScoreIcon(result.scores[3])))
         )
+        appData.totals[0] += result.scores[0];
+        appData.totals[1] += result.scores[1];
+        appData.totals[2] += result.scores[2];
+        appData.totals[3] += result.scores[3];
       });
+
+      $("#score-area").append(
+        $("<tr/>", {class: "total-score"})
+          .append($("<td/>"))
+          .append($("<td/>").text(appData.totals[0]))
+          .append($("<td/>").text(appData.totals[1]))
+          .append($("<td/>").text(appData.totals[2]))
+          .append($("<td/>").text(appData.totals[3]))
+      );
+
     });
 
     function getScoreIcon(score) {
