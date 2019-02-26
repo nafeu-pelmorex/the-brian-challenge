@@ -42,7 +42,10 @@
     border-bottom: 3px solid black;
   }
   .punishments {
-    font-size: 1.3em;
+    font-size: 1.5em;
+  }
+  .card-columns {
+    column-count: 2;
   }
 </style>
 </head>
@@ -53,45 +56,40 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-12 col-md-6">
-      <div class="card mb-4">
-        <div class="card-body">
-          <h3 class="card-title">Rules</h3>
-          <ol class="rules">
-            <li>Last person to arrive after 9am gets <span class="text-danger"><strong>1</strong> point</span></li>
-            <li>If you are the only person after 9am, you get <span class="text-danger"><strong>1</strong> point</span></li>
-            <li>Points reset every week</li>
-            <li>Person who loses has to treat other competitors to a customized Starbucks beverage at the end of the week</li>
-            <li>Loser has to keep a shameful card on their desk admitting to their incompetence</li>
-            <li>Excuses must be approved by <span class="text-danger">Brian</span></li>
-            <li><span class="text-danger">Brian</span> can change any and all rules of the game at any time without notice (and retroactively)</li>
-            <li>Any competitor who works from home must take a selfie at their desk with their work open before 9am</li>
-          </ol>
+    <div class="col-md-12">
+      <div class="card-columns">
+        <div class="card mb-4">
+          <div class="card-block m-4">
+            <h3 class="card-title">Rules</h3>
+            <ol class="rules">
+              <li>Last person to arrive after 9am gets <span class="text-danger"><strong>1</strong> point</span></li>
+              <li>If you are the only person after 9am, you get <span class="text-danger"><strong>1</strong> point</span></li>
+              <li>Points apply only on a week to week basis</li>
+              <li>Person who loses has to treat other competitors to a customized Starbucks beverage at a time most convenient for them</li>
+              <li>Excuses must be approved by <span class="text-danger">Brian</span></li>
+              <li><span class="text-danger">Brian</span> can change any and all rules of the game at any time without notice (and retroactively)</li>
+              <li>Any competitor who works from home must take a selfie at their desk with their work open <span class="text-danger">before 9am</span></li>
+              <li>Any competitor who leaves the challenge midway MUST commit to an <span class="text-danger">exit punishment</span> of buying everyone customized Starbucks beverages</li>
+            </ol>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-6">
-      <div class="card mb-4">
-        <div class="card-body">
-          <h3 class="card-title mb-4">Scores</h3>
-          <table id="score-area" class="table table-sm mb-4">
-            <tr id="score-headers">
-              <td>Date</td>
-            </tr>
-          </table>
+        <div class="card mb-4">
+          <div class="card-block m-4">
+            <h3 class="card-title mb-4">Punishments</h3>
+            <ul class="punishments">
+              <li><strong>Jaspreet</strong> owes Johnny a drink for <span class="text-danger">quitting the challenge</span></li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 col-md-6">
-      <div class="card mb-4">
-        <div class="card-body">
-          <h3 class="card-title mb-4">Punishments</h3>
-          <ul class="punishments">
-            <li><strong>Johnny</strong> owes everyone Starbucks on ___ (TBD) for <span class="text-danger">losing Week 1</span></li>
-            <li><strong>Jaspreet</strong> owes everyone Starbucks on ___ (TBD) for <span class="text-danger">quitting the challenge</span></li>
-          </ul>
+        <div class="card mb-4">
+          <div class="card-block m-4">
+            <h3 class="card-title mb-4">Scores</h3>
+            <table id="score-area" class="table table-sm mb-4">
+              <tr id="score-headers">
+                <td>Date</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -135,7 +133,7 @@
         },
         {
           date: "February 28th",
-          scores: [null, null, null]
+          scores: [0, null, null]
         },
         {
           date: "February 29th",
