@@ -1,4 +1,7 @@
-// State Data
+var rulesArea, owesArea, loserArea, scoresArea, cardAreas, cardColumns;
+
+var TEN_SECONDS = 10000;
+
 var appData = {
   competitors: [
     "Nafeu", "Vika", "Johnny"
@@ -28,12 +31,69 @@ var appData = {
     { date: "Mar 18th", scores: [0, 0, 1] },
     { date: "Mar 19th", scores: [0, 1, 0] },
     { date: "Mar 20th", scores: [1, 0, 0] },
-    { date: "Mar 21st", scores: [null, null, null] },
+    { date: "Mar 21st", scores: [0, 1, 0] },
     { date: "Mar 22nd", scores: [null, null, null] },
   ]
 }
 
+function hideCards() {
+  cardAreas.hide();
+}
+
+function showCards() {
+  cardAreas.show();
+}
+
+function setColumnCount(count) {
+  cardColumns.css({'column-count': count});
+}
+
+function rotateArea(previousCardSelector, currentCardSelector, additionalClasses, columnCount) {
+  hideCards();
+  previousCardSelector.removeClass(additionalClasses);
+  setColumnCount(columnCount);
+  currentCardSelector.addClass(additionalClasses);
+  currentCardSelector.show();
+}
+
+function rotateAll(additionalClasses) {
+  hideCards();
+  cardAreas.removeClass(additionalClasses);
+  setColumnCount(2);
+  showCards();
+}
+
+function showSection(section) {
+  switch(section) {
+    case 'all':
+      rotateAll('fadeInUpBig text-big');
+      break;
+    case 'rules':
+      rotateArea(scoresArea, rulesArea, 'fadeInUpBig text-big', 1);
+      break;
+    case 'owes':
+      rotateArea(rulesArea, owesArea, 'fadeInUpBig text-big', 1);
+      break;
+    case 'loser':
+      rotateArea(owesArea, loserArea, 'fadeInUpBig text-big', 1);
+      break;
+    case 'scores':
+      rotateArea(loserArea, scoresArea, 'fadeInUpBig text-big', 1);
+      break;
+    default:
+      break;
+  }
+}
+
 $(document).ready(function(){
+
+  rulesArea = $('#rules-area');
+  owesArea = $('#owes-area');
+  loserArea = $('#loser-area');
+  scoresArea = $('#scores-area');
+  cardAreas = $('.card-area');
+  cardColumns = $('.card-columns');
+
   appData.competitors.forEach(function(competitor){
     $("#score-headers").append($("<td>").text(competitor));
   });
@@ -47,6 +107,28 @@ $(document).ready(function(){
         .append($("<td/>").html(getScoreIcon(result.scores[2])))
     );
   });
+
+  var slides = {
+    sequence: ['all', 'rules', 'owes', 'loser', 'scores'],
+    currentSlideIndex: 0,
+    getNextSlide: function() {
+      if (slides.currentSlideIndex === slides.sequence.length - 1) {
+        slides.currentSlideIndex = 0;
+        console.log(slides.currentSlideIndex);
+        return slides.sequence[slides.currentSlideIndex];
+      } else {
+        slides.currentSlideIndex += 1;
+        console.log(slides.currentSlideIndex);
+        return slides.sequence[slides.currentSlideIndex];
+      }
+    },
+  };
+
+  setColumnCount(2);
+  setInterval(function(){
+    console.log('Rotating...');
+    showSection(slides.getNextSlide());
+  }, TEN_SECONDS)
 
 });
 

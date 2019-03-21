@@ -1,32 +1,45 @@
-  body {
-    font-family: 'Gloria Hallelujah', cursive;
-  }
+body {
+  font-family: 'Gloria Hallelujah', cursive;
+}
 
-  .rules {
-    font-size: 1.3em;
-  }
+.rules {
+  font-size: 1.3em;
+}
 
-  i {
-    font-size: 1.5em;
-  }
+i {
+  font-size: 1.5em;
+}
 
-  .total-score {
-    font-size: 1.6em;
-    font-weight: bold;
-  }
+.total-score {
+  font-size: 1.6em;
+  font-weight: bold;
+}
 
-  .title {
-    font-size: 3em;
-  }
+.title {
+  font-size: 3em;
+}
 
-  .end-of-week {
-    border-bottom: 3px solid black;
-  }
+.end-of-week {
+  border-bottom: 3px solid black;
+}
 
-  .punishments {
-    font-size: 1.5em;
-  }
+.punishments {
+  font-size: 1.5em;
+}
 
-  .card-columns {
-    column-count: 2;
-  }
+.text-big h3 {
+  font-size: 40px !important;
+}
+
+.text-big h1 {
+  font-size: 80px !important;
+}
+
+.text-big {
+  margin-top: 25px;
+  padding: 3%;
+}
+
+.text-big .rules li {
+  font-size: 24px;
+}
