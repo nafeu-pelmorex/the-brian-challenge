@@ -1,6 +1,6 @@
 var rulesArea, owesArea, loserArea, scoresArea, cardAreas, cardColumns;
 
-var TEN_SECONDS = 10000;
+var THIRTY_SECONDS = 30000;
 
 var appData = {
   competitors: [
@@ -18,11 +18,12 @@ var appData = {
     // { date: "Feb 28th", scores: [0, 0, 1] },
     // { date: "Mar 1st", scores: [0, 1, 0], class: "end-of-week"},
     { date: "Feb 25th - Mar 1st", scores: [0, 1, 0], class: "end-of-week"},
-    { date: "Mar 4th", scores: [0, 0, 1] },
-    { date: "Mar 5th", scores: [0, 0, 0] },
-    { date: "Mar 6th", scores: [0, 0, 0] },
-    { date: "Mar 7th", scores: [0, 0, 0] },
-    { date: "Mar 8th", scores: [0, 0, 0], class: "end-of-week"},
+    // { date: "Mar 4th", scores: [0, 0, 1] },
+    // { date: "Mar 5th", scores: [0, 0, 0] },
+    // { date: "Mar 6th", scores: [0, 0, 0] },
+    // { date: "Mar 7th", scores: [0, 0, 0] },
+    // { date: "Mar 8th", scores: [0, 0, 0], class: "end-of-week"},
+    { date: "Mar 4th - Mar 8th", scores: [0, 0, 1], class: "end-of-week"},
     { date: "Mar 11th", scores: [0, 0, 0] },
     { date: "Mar 12th", scores: [1, 0, 0] },
     { date: "Mar 13th", scores: [0, 1, 0] },
@@ -32,7 +33,12 @@ var appData = {
     { date: "Mar 19th", scores: [0, 1, 0] },
     { date: "Mar 20th", scores: [1, 0, 0] },
     { date: "Mar 21st", scores: [0, 1, 0] },
-    { date: "Mar 22nd", scores: [null, null, null] },
+    { date: "Mar 22nd", scores: [1, 0, 0], class: "end-of-week" },
+    { date: "Mar 25th", scores: [1, 0, 0] },
+    { date: "Mar 26th", scores: [null, null, null] },
+    { date: "Mar 27th", scores: [null, null, null] },
+    { date: "Mar 28th", scores: [null, null, null] },
+    { date: "Mar 29th", scores: [null, null, null] },
   ]
 }
 
@@ -64,25 +70,61 @@ function rotateAll(additionalClasses) {
 }
 
 function showSection(section) {
+  var additionalClasses = getRandomAnimation() + " single-view";
   switch(section) {
     case 'all':
-      rotateAll('fadeInUpBig text-big');
+      rotateAll(additionalClasses);
       break;
     case 'rules':
-      rotateArea(scoresArea, rulesArea, 'fadeInUpBig text-big', 1);
+      rotateArea(scoresArea, rulesArea, additionalClasses, 1);
       break;
     case 'owes':
-      rotateArea(rulesArea, owesArea, 'fadeInUpBig text-big', 1);
+      rotateArea(rulesArea, owesArea, additionalClasses, 1);
       break;
     case 'loser':
-      rotateArea(owesArea, loserArea, 'fadeInUpBig text-big', 1);
+      rotateArea(owesArea, loserArea, additionalClasses, 1);
       break;
     case 'scores':
-      rotateArea(loserArea, scoresArea, 'fadeInUpBig text-big', 1);
+      rotateArea(loserArea, scoresArea, additionalClasses, 1);
       break;
     default:
       break;
   }
+}
+
+function getRandomAnimation() {
+  var animations = [
+    'bounceInLeft',
+    'bounceInRight',
+    'bounceInUp',
+    'fadeIn',
+    'fadeInDown',
+    'fadeInDownBig',
+    'fadeInLeft',
+    'fadeInLeftBig',
+    'fadeInRight',
+    'fadeInRightBig',
+    'fadeInUp',
+    'fadeInUpBig',
+    'flipInX ',
+    'flipInY',
+    'lightSpeedIn',
+    'rotateIn',
+    'rotateInDownLeft',
+    'rotateInDownRight',
+    'rotateInUpLeft',
+    'rollIn',
+    'zoomInDown',
+    'zoomInLeft  ',
+    'zoomInRight ',
+    'zoomInUp',
+    'slideInDown',
+    'slideInLeft',
+    'slideInRight',
+    'slideInUp',
+  ]
+
+  return animations[Math.floor(Math.random()*animations.length)];
 }
 
 $(document).ready(function(){
@@ -109,7 +151,13 @@ $(document).ready(function(){
   });
 
   var slides = {
-    sequence: ['all', 'rules', 'owes', 'loser', 'scores'],
+    sequence: [
+      'all',
+      'rules',
+      'owes',
+      // 'loser',
+      'scores'
+    ],
     currentSlideIndex: 0,
     getNextSlide: function() {
       if (slides.currentSlideIndex === slides.sequence.length - 1) {
@@ -128,7 +176,7 @@ $(document).ready(function(){
   setInterval(function(){
     console.log('Rotating...');
     showSection(slides.getNextSlide());
-  }, TEN_SECONDS)
+  }, THIRTY_SECONDS)
 
 });
 

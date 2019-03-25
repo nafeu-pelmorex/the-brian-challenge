@@ -27,19 +27,23 @@ i {
   font-size: 1.5em;
 }
 
-.text-big h3 {
+.single-view h3 {
   font-size: 40px !important;
 }
 
-.text-big h1 {
+.single-view h1 {
   font-size: 80px !important;
 }
 
-.text-big {
+.single-view {
   margin-top: 25px;
   padding: 3%;
 }
 
-.text-big .rules li {
+.single-view .rules li {
   font-size: 24px;
+}
+
+.single-view td {
+  font-size: 0.75em;
 }
