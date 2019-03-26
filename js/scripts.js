@@ -1,4 +1,8 @@
-var rulesArea, owesArea, loserArea, scoresArea, cardAreas, cardColumns;
+var rulesArea, owesArea, loserArea,
+    scoresArea, cardAreas, cardColumns,
+    scoreTable, scoreHeaders, scoreSummaryArea;
+
+var totalScoreNafeu, totalScoreVika, totalScoreJohnny;
 
 var THIRTY_SECONDS = 30000;
 
@@ -35,7 +39,7 @@ var appData = {
     { date: "Mar 21st", scores: [0, 1, 0] },
     { date: "Mar 22nd", scores: [1, 0, 0], class: "end-of-week" },
     { date: "Mar 25th", scores: [1, 0, 0] },
-    { date: "Mar 26th", scores: [null, null, null] },
+    { date: "Mar 26th", scores: [0, 0, 0] },
     { date: "Mar 27th", scores: [null, null, null] },
     { date: "Mar 28th", scores: [null, null, null] },
     { date: "Mar 29th", scores: [null, null, null] },
@@ -62,9 +66,10 @@ function rotateArea(previousCardSelector, currentCardSelector, additionalClasses
   currentCardSelector.show();
 }
 
-function rotateAll(additionalClasses) {
+function rotateAll() {
   hideCards();
-  cardAreas.removeClass(additionalClasses);
+  cardAreas.removeClass();
+  cardAreas.addClass('card-area animated card mb-4');
   setColumnCount(2);
   showCards();
 }
@@ -73,10 +78,10 @@ function showSection(section) {
   var additionalClasses = getRandomAnimation() + " single-view";
   switch(section) {
     case 'all':
-      rotateAll(additionalClasses);
+      rotateAll();
       break;
     case 'rules':
-      rotateArea(scoresArea, rulesArea, additionalClasses, 1);
+      rotateArea(scoreSummaryArea, rulesArea, additionalClasses, 1);
       break;
     case 'owes':
       rotateArea(rulesArea, owesArea, additionalClasses, 1);
@@ -84,8 +89,8 @@ function showSection(section) {
     case 'loser':
       rotateArea(owesArea, loserArea, additionalClasses, 1);
       break;
-    case 'scores':
-      rotateArea(loserArea, scoresArea, additionalClasses, 1);
+    case 'score-summary':
+      rotateArea(loserArea, scoreSummaryArea, additionalClasses, 1);
       break;
     default:
       break;
@@ -135,19 +140,34 @@ $(document).ready(function(){
   scoresArea = $('#scores-area');
   cardAreas = $('.card-area');
   cardColumns = $('.card-columns');
+  scoreSummaryArea = $('#score-summary-area');
+  scoreTable = $('#score-table');
+  scoreHeaders = $('#score-headers');
+
+  totalScoreNafeu = $('#total-score-Nafeu');
+  totalScoreVika = $('#total-score-vika');
+  totalScoreJohnny = $('#total-score-Johnny');
 
   appData.competitors.forEach(function(competitor){
-    $("#score-headers").append($("<td>").text(competitor));
+    scoreHeaders.append($("<td>").text(competitor));
   });
 
+  totalScoreNafeu.text(0);
+  totalScoreVika.text(0);
+  totalScoreJohnny.text(0);
+
   appData.results.forEach(function(result){
-    $("#score-area").append(
+    scoreTable.append(
       $("<tr/>", {class: getRowClass(result)})
         .append($("<td/>").text(result.date))
         .append($("<td/>").html(getScoreIcon(result.scores[0])))
         .append($("<td/>").html(getScoreIcon(result.scores[1])))
         .append($("<td/>").html(getScoreIcon(result.scores[2])))
     );
+
+    totalScoreNafeu.text(parseInt(totalScoreNafeu.text()) + result.scores[0]);
+    totalScoreVika.text(parseInt(totalScoreVika.text()) + result.scores[1]);
+    totalScoreJohnny.text(parseInt(totalScoreJohnny.text()) + result.scores[2]);
   });
 
   var slides = {
@@ -156,7 +176,7 @@ $(document).ready(function(){
       'rules',
       'owes',
       // 'loser',
-      'scores'
+      // 'score-summary'
     ],
     currentSlideIndex: 0,
     getNextSlide: function() {
