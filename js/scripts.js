@@ -1,6 +1,6 @@
 var rulesArea, owesArea, loserArea,
     scoresArea, cardAreas, cardColumns,
-    scoreTable, scoreHeaders, scoreSummaryArea;
+    scoreTable, scoreHeaders;
 
 var totalScoreNafeu, totalScoreVika, totalScoreJohnny;
 
@@ -40,7 +40,7 @@ var appData = {
     { date: "Mar 22nd", scores: [1, 0, 0], class: "end-of-week" },
     { date: "Mar 25th", scores: [1, 0, 0] },
     { date: "Mar 26th", scores: [0, 0, 0] },
-    { date: "Mar 27th", scores: [null, null, null] },
+    { date: "Mar 27th", scores: [0, 1, 0] },
     { date: "Mar 28th", scores: [null, null, null] },
     { date: "Mar 29th", scores: [null, null, null] },
   ]
@@ -140,23 +140,14 @@ $(document).ready(function(){
   scoresArea = $('#scores-area');
   cardAreas = $('.card-area');
   cardColumns = $('.card-columns');
-  scoreSummaryArea = $('#score-summary-area');
   scoreTable = $('#score-table');
   scoreHeaders = $('#score-headers');
-
-  totalScoreNafeu = $('#total-score-Nafeu');
-  totalScoreVika = $('#total-score-vika');
-  totalScoreJohnny = $('#total-score-Johnny');
 
   appData.competitors.forEach(function(competitor){
     scoreHeaders.append($("<td>").text(competitor));
   });
 
-  totalScoreNafeu.text(0);
-  totalScoreVika.text(0);
-  totalScoreJohnny.text(0);
-
-  appData.results.forEach(function(result){
+  appData.results.reverse().forEach(function(result){
     scoreTable.append(
       $("<tr/>", {class: getRowClass(result)})
         .append($("<td/>").text(result.date))
@@ -164,10 +155,6 @@ $(document).ready(function(){
         .append($("<td/>").html(getScoreIcon(result.scores[1])))
         .append($("<td/>").html(getScoreIcon(result.scores[2])))
     );
-
-    totalScoreNafeu.text(parseInt(totalScoreNafeu.text()) + result.scores[0]);
-    totalScoreVika.text(parseInt(totalScoreVika.text()) + result.scores[1]);
-    totalScoreJohnny.text(parseInt(totalScoreJohnny.text()) + result.scores[2]);
   });
 
   var slides = {
@@ -175,8 +162,6 @@ $(document).ready(function(){
       'all',
       'rules',
       'owes',
-      // 'loser',
-      // 'score-summary'
     ],
     currentSlideIndex: 0,
     getNextSlide: function() {
