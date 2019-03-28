@@ -41,7 +41,7 @@ var appData = {
     { date: "Mar 25th", scores: [1, 0, 0] },
     { date: "Mar 26th", scores: [0, 0, 0] },
     { date: "Mar 27th", scores: [0, 1, 0] },
-    { date: "Mar 28th", scores: [null, null, null] },
+    { date: "Mar 28th", scores: [0, 1, 0] },
     { date: "Mar 29th", scores: [null, null, null] },
   ]
 }
@@ -147,7 +147,7 @@ $(document).ready(function(){
     scoreHeaders.append($("<td>").text(competitor));
   });
 
-  appData.results.reverse().forEach(function(result){
+  appData.results.forEach(function(result){
     scoreTable.append(
       $("<tr/>", {class: getRowClass(result)})
         .append($("<td/>").text(result.date))
