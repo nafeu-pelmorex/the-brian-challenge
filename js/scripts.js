@@ -15,34 +15,41 @@ var appData = {
     // { date: "Feb 20th", scores: [0, 0, 1] },
     // { date: "Feb 21st", scores: [0, 0, 0] },
     // { date: "Feb 22nd", scores: [0, 0, 0], class: "end-of-week"},
-    { date: "Feb 19th - Feb 22nd", scores: [0, 0, 1], class: "end-of-week"},
+    { date: "Feb 19th - Feb 22nd", scores: [2, 2, 3], class: "end-of-week"},
     // { date: "Feb 25th", scores: [1, 0, 0] },
     // { date: "Feb 26th", scores: [0, 0, 0] },
     // { date: "Feb 27th", scores: [0, 1, 0] },
     // { date: "Feb 28th", scores: [0, 0, 1] },
     // { date: "Mar 1st", scores: [0, 1, 0], class: "end-of-week"},
-    { date: "Feb 25th - Mar 1st", scores: [0, 1, 0], class: "end-of-week"},
+    { date: "Feb 25th - Mar 1st", scores: [2, 3, 2], class: "end-of-week"},
     // { date: "Mar 4th", scores: [0, 0, 1] },
     // { date: "Mar 5th", scores: [0, 0, 0] },
     // { date: "Mar 6th", scores: [0, 0, 0] },
     // { date: "Mar 7th", scores: [0, 0, 0] },
     // { date: "Mar 8th", scores: [0, 0, 0], class: "end-of-week"},
-    { date: "Mar 4th - Mar 8th", scores: [0, 0, 1], class: "end-of-week"},
-    { date: "Mar 11th", scores: [0, 0, 0] },
-    { date: "Mar 12th", scores: [1, 0, 0] },
-    { date: "Mar 13th", scores: [0, 1, 0] },
-    { date: "Mar 14th", scores: [0, 0, 0] },
-    { date: "Mar 15th", scores: [1, 0, 0], class: "end-of-week"},
-    { date: "Mar 18th", scores: [0, 0, 1] },
-    { date: "Mar 19th", scores: [0, 1, 0] },
-    { date: "Mar 20th", scores: [1, 0, 0] },
-    { date: "Mar 21st", scores: [0, 1, 0] },
-    { date: "Mar 22nd", scores: [1, 0, 0], class: "end-of-week" },
+    { date: "Mar 4th - Mar 8th", scores: [2, 2, 3], class: "end-of-week"},
+    // { date: "Mar 11th", scores: [0, 0, 0] },
+    // { date: "Mar 12th", scores: [1, 0, 0] },
+    // { date: "Mar 13th", scores: [0, 1, 0] },
+    // { date: "Mar 14th", scores: [0, 0, 0] },
+    // { date: "Mar 15th", scores: [1, 0, 0], class: "end-of-week"},
+    { date: "Mar 11th - Mar 15th", scores: [3, 2, 2], class: "end-of-week"},
+    // { date: "Mar 18th", scores: [0, 0, 1] },
+    // { date: "Mar 19th", scores: [0, 1, 0] },
+    // { date: "Mar 20th", scores: [1, 0, 0] },
+    // { date: "Mar 21st", scores: [0, 1, 0] },
+    // { date: "Mar 22nd", scores: [1, 0, 0], class: "end-of-week" },
+    { date: "Mar 18th - Mar 22nd", scores: [3, 2, 2], class: "end-of-week" },
     { date: "Mar 25th", scores: [1, 0, 0] },
     { date: "Mar 26th", scores: [0, 0, 0] },
     { date: "Mar 27th", scores: [0, 1, 0] },
     { date: "Mar 28th", scores: [0, 1, 0] },
-    { date: "Mar 29th", scores: [null, null, null] },
+    { date: "Mar 29th", scores: [1, 0, 0], class: "end-of-week" },
+    { date: "Apr 1st", scores: [null, null, null] },
+    { date: "Apr 2nd", scores: [null, null, null] },
+    { date: "Apr 3rd", scores: [null, null, null] },
+    { date: "Apr 4th", scores: [null, null, null] },
+    { date: "Apr 5th", scores: [null, null, null] },
   ]
 }
 
@@ -186,13 +193,16 @@ $(document).ready(function(){
 });
 
 function getScoreIcon(score) {
-  if (score !== null) {
-    if (score == 0) {
-      return '<i class="fas fa-check"></i>';
-    }
-    return '<i class="fas fa-times"></i>';
-  } else {
+  if (score === null) {
     return '<i class="far fa-square"></i>';
+  } else if (score === 0) {
+    return '<i class="text-info fas fa-check"></i>';
+  } else if (score === 1) {
+    return '<i class="fas fa-times"></i>';
+  } else if (score === 2) {
+    return '<i class="text-warning fas fa-medal"></i>';
+  } else if (score === 3) {
+    return '<i class="text-danger fas fa-thumbs-down"></i>';
   }
 }
 
