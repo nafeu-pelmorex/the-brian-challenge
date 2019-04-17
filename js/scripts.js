@@ -57,9 +57,9 @@ var appData = {
     { date: "Apr 10th", scores: [0, 1, 0] },
     { date: "Apr 11th", scores: [1, 0, 0] },
     { date: "Apr 12th", scores: [1, 0, 0], class: "end-of-week" },
-    { date: "Apr 15th", scores: [null, null, null] },
-    { date: "Apr 16th", scores: [null, null, null] },
-    { date: "Apr 17th", scores: [null, null, null] },
+    { date: "Apr 15th", scores: [0, 0, 0] },
+    { date: "Apr 16th", scores: [0, 1, 0] },
+    { date: "Apr 17th", scores: [1, 0, 0] },
     { date: "Apr 18th", scores: [null, null, null] },
     { date: "Apr 19th", scores: [null, null, null] },
   ]
