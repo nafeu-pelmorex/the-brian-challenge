@@ -1,5 +1,12 @@
 body {
-  font-family: 'Gloria Hallelujah', cursive;
+  font-family: 'Nunito', sans-serif;
+  background-color: #19222d;
+  color: white;
+}
+
+.card {
+  border: none;
+  background-color: #222f3e;
 }
 
 .rules {
@@ -46,4 +53,16 @@ i {
 
 .single-view td {
   font-size: 0.75em;
+}
+
+.text-danger {
+  color: #ee5253;
+}
+
+.text-primary {
+  color: #54a0ff;
+}
+
+.text-warning {
+  color: #feca57;
 }
